@@ -7,5 +7,5 @@ Product.init(
     price: { type: DataTypes.INTEGER },
     title: { type: DataTypes.STRING },
   },
-  { sequelize, modelName: "Product" }
+  { sequelize, modelName: "product" }
 );

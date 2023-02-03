@@ -8,5 +8,5 @@ User.init(
     lastname: { type: DataTypes.STRING },
     birthday: { type: DataTypes.DATEONLY }
   },
-  { sequelize, modelName: "User" }
+  { sequelize, modelName: "user" }
 );

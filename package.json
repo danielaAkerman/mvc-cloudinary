@@ -8,7 +8,8 @@
     "build:be": "tsc",
     "build:fe": "",
     "build": "npm run build:be && npm run build:fe",
-    "start": "node ./be-dist/index.js"
+    "start": "node ./be-dist/index.js",
+    "sync": "ts-node ./be-src/sync.ts"
   },
   "dependencies": {
     "pg": "^8.8.0",

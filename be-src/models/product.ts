@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from ".";
+import { sequelize } from "./connection";
 
 export class Product extends Model {}
 Product.init(

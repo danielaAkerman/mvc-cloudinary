@@ -1,37 +1,31 @@
 import * as express from "express";
-import { sequelize } from "./db";
-import { User, Product } from "./db/models";
+import * as path from "path";
+import { User, Product } from "./models";
+import {} from "./controllers/auth-controller";
+import { createProduct } from "./controllers/products-controller";
+import {} from "./controllers/users-controller";
 
 const port = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
-// sequelize.sync({ force: true }).then((res) => {
-//   console.log(res);
-//   User.findAll()
-// });
+// LA RECEPCIÓN DE LOS DATOS (body, params, etc) SE CHEQUEA EN ESTA INSTANCIA
 
-app.post("/test", async (req, res) => {
-  // const user = await User.create({
-  //   username: "Pancha",
-  // });
+app.post("/products", async (req, res) => {
+  if (!req.body) {
+    res.status(400).json({
+      message: "Falta el body",
+    });
+  }
+  const newProduct = await createProduct(1, req.body);
 
-  // const product = await Product.create({
-  //   title: "Cucha",
-  //   price: 4900,
-  //   UserId: 1,
-  // });
-
-  const products = await Product.findAll({
-    where: {
-      UserId: 1,
-    },
-    include: [User],
-  });
-
-  res.json({ products });
+  res.json({ Product: newProduct });
 });
 
+app.get("*", function (req, res) {
+  const ruta = path.resolve(__dirname, "../fe-dist/index.html");
+  res.sendFile(ruta);
+});
 app.listen(port, () => {
   console.log("Corriendo en puerto http://localhost:" + port);
 });

@@ -12,6 +12,7 @@ const app = express();
 app.use(express.json());
 
 const SECRET = "CS90AJN3458DFGN34NLSD0U4JI28UVS0U3MK23RO";
+const staticDirPath = path.resolve(__dirname, "../fe-dist");
 
 function getSHA256ofJSON(text: string) {
   return crypto.createHash("sha256").update(text).digest("hex");
@@ -29,9 +30,6 @@ app.post("/products", async (req, res) => {
 
   res.json({ Product: newProduct });
 });
-
-
-
 
 // signUp
 app.post("/auth", async (req, res) => {
@@ -98,15 +96,12 @@ app.get("/me", authMiddleware, async (req, res) => {
   res.json(foundUser);
 });
 
-
-
-
-
+app.use(express.static(staticDirPath));
 
 app.get("*", function (req, res) {
-  const ruta = path.resolve(__dirname, "../fe-dist/index.html");
-  res.sendFile(ruta);
+  res.sendFile(staticDirPath + "/index.html");
 });
+
 app.listen(port, () => {
   console.log("Corriendo en puerto http://localhost:" + port);
 });

@@ -20,7 +20,7 @@ function getSHA256ofJSON(text: string) {
 
 // LA RECEPCIÓN DE LOS DATOS (body, params, etc) SE CHEQUEA EN ESTA INSTANCIA
 
-app.post("/products", async (req, res) => {
+app.post("/profile", async (req, res) => {
   if (!req.body) {
     res.status(400).json({
       message: "Falta el body",

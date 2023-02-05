@@ -1,7 +1,7 @@
 import { sequelize } from "./models/connection";
 import { User, Product } from "./models";
 
-sequelize.sync({ alter: true }).then((res) => {
+User.sequelize.sync({ force: true }).then((res) => {
   console.log(res);
   User.findAll()
 });

@@ -4,9 +4,9 @@ import { sequelize } from "./connection";
 export class User extends Model {}
 User.init(
   {
-    username: { type: DataTypes.STRING },
-    lastname: { type: DataTypes.STRING },
-    birthday: { type: DataTypes.DATEONLY }
+    fullname: { type: DataTypes.STRING },
+    bio: { type: DataTypes.STRING },
+    pictureURL: { type: DataTypes.STRING }
   },
   { sequelize, modelName: "user" }
 );

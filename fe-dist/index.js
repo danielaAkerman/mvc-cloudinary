@@ -1,6 +1,13 @@
-// const host = "http:localhost/3000"
+async function pullProfile() {
+  const res = await fetch("/profile");
+  const data = await res.json();
+  console.log("La data guardada es:", data);
+  return data;
+}
 
 function main() {
+  pullProfile();
+
   let imageDataURL;
   const myDropzone = new Dropzone(".profile-pic-container", {
     url: "/falsa",

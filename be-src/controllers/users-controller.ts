@@ -15,10 +15,21 @@ export async function updateProfile(userId, updateData) {
       pictureURL: imagen.secure_url,
     };
 
-    await User.update(updateDataComplete, { where: { id: userId } });
+    await User.create(updateDataComplete);
+    // await User.update(updateDataComplete, { where: { id: userId } });
 
     return updateDataComplete;
-  }else{
-    console.log("No hay imagen adjunta")
+  } else {
+    console.log("No hay imagen adjunta");
   }
+}
+
+export async function getProfile(userId) {
+  const userProfile = await User.findByPk(userId);
+  return userProfile;
+}
+
+export async function getEveryProfiles() {
+  const profiles = await User.findAll();
+  return profiles;
 }

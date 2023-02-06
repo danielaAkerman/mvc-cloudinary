@@ -3,7 +3,7 @@ import * as path from "path";
 import * as crypto from "crypto";
 import * as jwt from "jsonwebtoken";
 import { User, Product, Auth } from "./models";
-import {} from "./controllers/users-controller";
+import { updateProfile } from "./controllers/users-controller";
 import { createProduct } from "./controllers/products-controller";
 import {} from "./controllers/auth-controller";
 
@@ -26,9 +26,9 @@ app.post("/profile", async (req, res) => {
       message: "Falta el body",
     });
   }
-  const newProduct = await createProduct(1, req.body);
-
-  res.json({ Product: newProduct });
+  const newProfile = await updateProfile(1, req.body);
+  console.log("desde back", newProfile);
+  res.json(newProfile);
 });
 
 // signUp

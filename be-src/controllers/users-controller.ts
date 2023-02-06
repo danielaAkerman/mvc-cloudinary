@@ -1,18 +1,24 @@
 import { User, Product } from "../models";
 import { cloudinary } from "../lib/cloudinary";
 
-export async function updateProfile(updateData) {
-  if (updateData.imageDataURL) {
-    cloudinary.uploader.upload_stream(
-      {
-        resource_type: "image",
-        discard_original_filename: true,
-        width: 1000,
-      },
-      function (error, result) {
-        // URL de la imagen guardada
-        console.log(result.secure_url);
-      }
-    );
+export async function updateProfile(userId, updateData) {
+  if (updateData.pictureURL) {
+    const imagen = await cloudinary.uploader.upload(updateData.pictureURL, {
+      resource_type: "image",
+      discard_original_filename: true,
+      width: 1000,
+    });
+
+    const updateDataComplete = {
+      fullname: updateData.fullname,
+      bio: updateData.bio,
+      pictureURL: imagen.secure_url,
+    };
+
+    await User.update(updateDataComplete, { where: { id: userId } });
+
+    return updateDataComplete;
+  }else{
+    console.log("No hay imagen adjunta")
   }
 }

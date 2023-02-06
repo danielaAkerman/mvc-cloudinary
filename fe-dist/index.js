@@ -15,10 +15,21 @@ function main() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const nombre = e.target.fullname.value;
-    const bio = e.target.bio.value;
-    const imagen = imageDataURL.dataURL;
-    console.log({nombre, bio, imagen});
+    const datosPerfil = {
+      fullname: e.target.fullname.value,
+      bio: e.target.bio.value,
+      pictureURL: imageDataURL.dataURL,
+    };
+    console.log("los datos son:", datosPerfil.pictureURL);
+
+    fetch("/profile", {
+      method: "POST",
+      body: JSON.stringify(datosPerfil),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => console.log(data));
   });
 }
 

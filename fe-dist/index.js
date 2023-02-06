@@ -1,3 +1,5 @@
+// const host = "http:localhost/3000"
+
 function main() {
   let imageDataURL;
   const myDropzone = new Dropzone(".profile-pic-container", {
@@ -24,6 +26,9 @@ function main() {
 
     fetch("/profile", {
       method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
       body: JSON.stringify(datosPerfil),
     })
       .then((res) => {

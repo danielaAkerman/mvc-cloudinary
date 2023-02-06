@@ -9,7 +9,7 @@ import {} from "./controllers/auth-controller";
 
 const port = process.env.PORT || 3000;
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 
 const SECRET = "CS90AJN3458DFGN34NLSD0U4JI28UVS0U3MK23RO";
 const staticDirPath = path.resolve(__dirname, "../fe-dist");
@@ -26,6 +26,7 @@ app.post("/profile", async (req, res) => {
       message: "Falta el body",
     });
   }
+  console.log("el body del endpoint es", req.body);
   const newProfile = await updateProfile(1, req.body);
   console.log("desde back", newProfile);
   res.json(newProfile);

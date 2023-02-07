@@ -1,8 +1,13 @@
 async function pullProfile() {
+  const form = document.querySelector(".form");
+  const img = document.querySelector(".profile-pic");
   const res = await fetch("/profile");
   const data = await res.json();
-  console.log("La data guardada es:", data);
-  return data;
+  if (data) {
+    form.fullname.value = data.fullname;
+    form.bio.value = data.bio;
+    img.src = data.pictureURL;
+  }
 }
 
 function main() {
